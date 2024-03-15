@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, ScrollView } from 'react-native'; // Ajout de ScrollView pour faire défiler le contenu si nécessaire
 import * as Location from 'expo-location';
 import axios from 'axios';
 
@@ -8,24 +8,10 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [dataResponseName, setDataResponseName] = useState(null);
-  const [dataResponseTemp,setDataResponseTemp] = useState(null);
-  const [dataResponseDescription,setDataDescription] = useState(null);
-  const [DataIconWeather,setDataIconWeather] = useState(null);
-  const [list, setList] = useState([]);
-  const [DataResponseTempPast,setDataResponseTempPast] = useState(null);
-  const [weatherData, setWeatherData] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState(null);
+  const [forecast, setForecast] = useState([]);
 
-
-  const [dataResponseNamePast,setDataResponseNamePast] = useState(null);
-  const [dataList,setDataList] = useState(null);
-  const [dataWeatherTempPre,setDataWeatherTempPre]= useState(null);
-  const [ForecastData,setForecastData]=useState([]);
-  const apiKey = `123d1e4d375366e2f26a9005f945d865`
-
-  // Recuperation des datas de prévisualisation : 
-  const [PreviTemp,setPreviTemp] = useState([])
-  const [TypeTime, SetTypeTime] = useState(null)
+  const apiKey = 'bc803e1493a794df6a5e8887f9da8974';
 
   useEffect(() => {
     (async () => {
@@ -34,154 +20,132 @@ export default function App() {
         setErrorMsg('Permission to access location was denied');
         return;
       }
+
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       setLatitude(location.coords.latitude);
       setLongitude(location.coords.longitude);
     })();
-  }, []);  
+  }, []);
 
-// Pour la prévision essayer de mettre ca dans un use effect 
-useEffect(() => {
-  if (latitude != null && longitude != null){
-    // Mettre un loader ici 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang={fr}&units=metric&appid=${apiKey}`)
-    .then (response =>  response.json())
-    .then(response => {return response})
-    .then (response => {setDataResponseName(response.name); return (response)})
-    .then (response => {setDataResponseTemp(response.main.temp); return (response)})
-    .then(response => {setDataDescription(response.weather[0].description); return(response)})
-    .then(response => {setDataIconWeather(response.weather[0].icon); return(response)})
+  useEffect(() => {
+    if (latitude != null && longitude != null) {
+      fetchCurrentWeather();
+      fetchForecast();
+    }
+  }, [latitude, longitude, apiKey]);
 
+  const fetchCurrentWeather = () => {
+    axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+      params: {
+        lat: latitude,
+        lon: longitude,
+        lang: 'fr',
+        units: 'metric',
+        appid: apiKey
+      }
+    })
+    .then((response) => {
+      const data = response.data;
+      if (data.cod === 200) {
+        setCurrentWeather({
+          name: data.name,
+          temp: data.main.temp,
+          description: data.weather[0].description,
+          icon: data.weather[0].icon,
+        });
+      } else {
+        setErrorMsg(`Error fetching current weather: ${data.message}`);
+      }
+    })
+    .catch((error) => {
+      console.error('Erreur lors de la récupération des données météorologiques:', error);
+    });
+  };
 
-    // fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=fr`)
-    // .then (response =>  response.json())
-    // const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=fr`;
-    // console.log(forecastUrl)
-    
-    // const response = await(fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=fr`))
-    // const data = await response.json();
-    // setForecastData(data.list);
-    
-    // .then(response =>response.json())
-    // .then(data => [
-    //   console.log(data.list.main)
-    // ])
-    // .then(data => {
-    //   // Utiliser les données ici
-    // data.list.forEach(item => {
-        // {setPreviTemp.append(item.main.temp)}
-        // console.log({PreviTemp})
-        // console.log(item.main.temp)
-        // setList((item) => [...list, item.main])
-        // console.log(item.weather.main) // Type de temps et pour l'icone c'est avec un .icon en plus 
-        // console.log(item.dt_txt,item.main.temp); // date et heure du time + température 
-      // });
-    //   // dataList.map((item) => {
-    //   //   // Assuming 'item.main.temp' is a valid property
-    //   //   setList((list) => [...list, item.main.temp]);
-    //   //   // Other logic related to 'item' can be added here
-    //   // });
-    // })
-    // .catch(error => {
-    //   console.error('Erreur lors de la récupération des données:', error);
-    // });
-  }
-}, [latitude,longitude])
+  const fetchForecast = () => {
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast`, {
+      params: {
+        lat: latitude,
+        lon: longitude,
+        appid: apiKey,
+        units: 'metric',
+        lang: 'fr'
+      }
+    })
+    .then((response) => {
+      const data = response.data;
+      if (data.cod === '200' && data.list) {
+        const nextFiveDays = data.list.slice(0, 5);
+        setForecast(nextFiveDays);
+      } else {
+        setErrorMsg(`Error fetching forecast: ${data.message}`);
+      }
+    })
+    .catch((error) => {
+      console.error('Erreur lors de la récupération des données de prévision:', error);
+    });
+  };
 
-// useEffect(() => {
-//   const fetchForecast = async () => {
-//     try {
-//       if (latitude && longitude) {
-//         const response = await fetch(
-//           'https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=fr'
-//         );
-//         const data = await response.json();
-//         setForecastData(data.list);
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   fetchForecast();
-// }, [latitude,longitude]);
-
-// console.log(ForecastData)
-// console.log(PreviTemp)
-// useEffect(() => {
-//     axios.get('')
-//     .then(function(response) {
-//       console.log("Response prevision :",response.response)
-//       console.log(response.response)
-//       setForecastData(response.config.main);     
-//     })
-//     .catch(function(error) {
-//       console.error('Erreur lors de la récupération des données de prévision:', error);
-//     });
-//   })
-
-// Prévisionnel : 
-// function fetchForecast(lat,lon,apiKey) {
-//   fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${45.7688167}&lon=${4.8593558}&appid=${'123d1e4d375366e2f26a9005f945d865'}&units=metric&lang=fr`)
-//   .then (response =>  response.json())
-// }
-
-
-// console.log(longitude)
-// console.log(latitude)
-// console.log(apiKey)
-
-// console.log(  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${45.7688167}&lon=${4.8593558}&appid=${'123d1e4d375366e2f26a9005f945d865'}&units=metric&lang=fr`)
-// .then (response =>  response.json()))
-
-
-
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
-
-  // if ({DataIconWeather} != null){
-    return (
-      
+  return (
+    <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        <Text style={styles.title}>Weather App</Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>Weather App</Text>
+        </View>
 
-        <Text style={styles.value}>{dataResponseName}</Text>
-        <Text>{dataResponseTemp} ° C</Text>
-        <Text>{dataResponseDescription}</Text>
-        <Image style={styles.iconWeather} source={{uri: `http://openweathermap.org/img/wn/${DataIconWeather}.png`}}></Image>
-      
-        <Text>Prévisionel :</Text>
-        <Text style={styles.value}>{dataResponseNamePast}</Text>      
+        <View style={styles.weatherInfo}>
+          <Text>{currentWeather?.name}</Text>
+          <Text>{currentWeather?.temp} ° C</Text>
+          <Text>{currentWeather?.description}</Text>
+          <Image source={{ uri: `http://openweathermap.org/img/wn/${currentWeather?.icon}.png` }} />
+        </View>
+
+        <View style={styles.weatherSection}>
+          <Text>Prévisionnel pour les 5 prochains jours :</Text>
+          {forecast.map((day, index) => (
+            <View key={index} style={styles.forecastItem}>
+              <Text>{day.dt_txt}</Text>
+              <Text>{day.main.temp} ° C</Text>
+              <Image source={{ uri: `http://openweathermap.org/img/wn/${day.weather[0].icon}.png` }} />
+            </View>
+          ))}
+        </View>
       </View>
-      
-    );
-  }
+    </ScrollView>
+  );
+}
 
-// }
-// Constante permettant d'ajouter du style sur l'application mpobile 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
   header: {
+    marginBottom: 20,
     backgroundColor: '#AEF6F4',
     padding: 15,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
   },
   title: {
-    fontSize: 24,
-    textAlign: 'center',
+    marginTop: 15,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-  value: {
-    fontSize: 18,
-    marginBottom: 5,
+  weatherInfo: {
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
   },
-  iconWeather: {
-    width: 50,
-    height: 50,
+  weatherSection: {
+    marginBottom: 20,
+  },
+  forecastItem: {
+    marginBottom: 10,
   },
 });
