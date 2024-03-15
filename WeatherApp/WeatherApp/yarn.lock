@@ -2709,10 +2709,17 @@ at-least-node@^1.0.0:
   resolved "https://registry.npmjs.org/at-least-node/-/at-least-node-1.0.0.tgz"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
+<<<<<<< HEAD
 axios@^1.6.5:
   version "1.6.5"
   resolved "https://registry.npmjs.org/axios/-/axios-1.6.5.tgz"
   integrity sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==
+=======
+axios@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.6.7.tgz"
+  integrity sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
   dependencies:
     follow-redirects "^1.15.4"
     form-data "^4.0.0"
@@ -4930,11 +4937,14 @@ hermes-estree@0.12.0:
   version "0.12.0"
   resolved "https://registry.npmjs.org/hermes-estree/-/hermes-estree-0.12.0.tgz"
   integrity sha512-+e8xR6SCen0wyAKrMT3UD0ZCCLymKhRgjEB5sS28rKiFir/fXgLoeRilRUssFCILmGHb+OvHDUlhxs0+IEyvQw==
+<<<<<<< HEAD
 
 hermes-estree@0.18.2:
   version "0.18.2"
   resolved "https://registry.npmjs.org/hermes-estree/-/hermes-estree-0.18.2.tgz"
   integrity sha512-KoLsoWXJ5o81nit1wSyEZnWUGy9cBna9iYMZBR7skKh7okYAYKqQ9/OczwpMHn/cH0hKDyblulGsJ7FknlfVxQ==
+=======
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
 
 hermes-parser@0.12.0:
   version "0.12.0"
@@ -6126,11 +6136,14 @@ metro-cache-key@0.76.8:
   version "0.76.8"
   resolved "https://registry.npmjs.org/metro-cache-key/-/metro-cache-key-0.76.8.tgz"
   integrity sha512-buKQ5xentPig9G6T37Ww/R/bC+/V1MA5xU/D8zjnhlelsrPG6w6LtHUS61ID3zZcMZqYaELWk5UIadIdDsaaLw==
+<<<<<<< HEAD
 
 metro-cache-key@0.80.4:
   version "0.80.4"
   resolved "https://registry.npmjs.org/metro-cache-key/-/metro-cache-key-0.80.4.tgz"
   integrity sha512-okOOSRFou7Mxaaigoi+KxdFIU/ZJtvDCC6l8BYKsdMx86JDlVdvtIgFU4tFrY1yEkv0wnn7WH0X3xSz4mHKwoQ==
+=======
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
 
 metro-cache@0.76.8:
   version "0.76.8"
@@ -6243,6 +6256,7 @@ metro-minify-terser@0.76.8:
   version "0.76.8"
   resolved "https://registry.npmjs.org/metro-minify-terser/-/metro-minify-terser-0.76.8.tgz"
   integrity sha512-Orbvg18qXHCrSj1KbaeSDVYRy/gkro2PC7Fy2tDSH1c9RB4aH8tuMOIXnKJE+1SXxBtjWmQ5Yirwkth2DyyEZA==
+<<<<<<< HEAD
   dependencies:
     terser "^5.15.0"
 
@@ -6250,6 +6264,8 @@ metro-minify-terser@0.80.4:
   version "0.80.4"
   resolved "https://registry.npmjs.org/metro-minify-terser/-/metro-minify-terser-0.80.4.tgz"
   integrity sha512-cuxfRZWDWGKjh+Z6t4KJkrvmV4JUKXfvQuAX7Pa7U0Mf1YJdLtoGQ5iVOu/6MkfYGXbppqGk2qmFECrRGRh0cA==
+=======
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
   dependencies:
     terser "^5.15.0"
 
@@ -6320,11 +6336,14 @@ metro-resolver@0.76.8:
   version "0.76.8"
   resolved "https://registry.npmjs.org/metro-resolver/-/metro-resolver-0.76.8.tgz"
   integrity sha512-KccOqc10vrzS7ZhG2NSnL2dh3uVydarB7nOhjreQ7C4zyWuiW9XpLC4h47KtGQv3Rnv/NDLJYeDqaJ4/+140HQ==
+<<<<<<< HEAD
 
 metro-resolver@0.80.4:
   version "0.80.4"
   resolved "https://registry.npmjs.org/metro-resolver/-/metro-resolver-0.80.4.tgz"
   integrity sha512-PCiVWN+d3gtWlobf8jPypwKx9T1QrZmhLJAyqIWLoOsZbpSfj1dn5h0ajCr8rYi9LNzIHm58GGYJK8VFHNn8Cw==
+=======
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
 
 metro-runtime@0.76.8:
   version "0.76.8"
@@ -6397,6 +6416,7 @@ metro-transform-plugins@0.76.8:
   version "0.76.8"
   resolved "https://registry.npmjs.org/metro-transform-plugins/-/metro-transform-plugins-0.76.8.tgz"
   integrity sha512-PlkGTQNqS51Bx4vuufSQCdSn2R2rt7korzngo+b5GCkeX5pjinPjnO2kNhQ8l+5bO0iUD/WZ9nsM2PGGKIkWFA==
+<<<<<<< HEAD
   dependencies:
     "@babel/core" "^7.20.0"
     "@babel/generator" "^7.20.0"
@@ -6408,6 +6428,8 @@ metro-transform-plugins@0.80.4:
   version "0.80.4"
   resolved "https://registry.npmjs.org/metro-transform-plugins/-/metro-transform-plugins-0.80.4.tgz"
   integrity sha512-cvmTLBA9ET64h+tgHt6prHlvOq98zBA1Glc9+wLZihPJo+Qmu9i3nQ1g4O+4aUnHivDlp+4C00BMNC+aC/buRQ==
+=======
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
   dependencies:
     "@babel/core" "^7.20.0"
     "@babel/generator" "^7.20.0"
@@ -6910,11 +6932,14 @@ ob1@0.76.8:
   version "0.76.8"
   resolved "https://registry.npmjs.org/ob1/-/ob1-0.76.8.tgz"
   integrity sha512-dlBkJJV5M/msj9KYA9upc+nUWVwuOFFTbu28X6kZeGwcuW+JxaHSBZ70SYQnk5M+j5JbNLR6yKHmgW4M5E7X5g==
+<<<<<<< HEAD
 
 ob1@0.80.4:
   version "0.80.4"
   resolved "https://registry.npmjs.org/ob1/-/ob1-0.80.4.tgz"
   integrity sha512-Lku8OBpq+fhF1ZdKUjbPnTNeqG+3OL0psGAEVJ8zcUiCB5/DPGR/rm3kLcjKDylzC9Rfv540/7I08+oImzfrhw==
+=======
+>>>>>>> 65e4bec50149f3f9c7085d3d5c5267baf6a2b3b6
 
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"

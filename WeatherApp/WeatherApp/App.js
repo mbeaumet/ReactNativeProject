@@ -4,7 +4,6 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 
 export default function App() {
-  // const axios = require(axios);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(null);
@@ -35,11 +34,10 @@ export default function App() {
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location)
-      setLatitude(location.coords.latitude)
-      setLongitude(location.coords.longitude)
+      setLocation(location);
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
     })();
   }, []);  
 
@@ -167,8 +165,9 @@ useEffect(() => {
 // }
 // Constante permettant d'ajouter du style sur l'application mpobile 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  header: {
+    backgroundColor: '#AEF6F4',
+    padding: 15,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 50,

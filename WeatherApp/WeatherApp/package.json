@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
-    "axios": "^1.6.5",
+    "axios": "^1.6.7",
     "expo": "~49.0.15",
     "expo-device": "~5.4.0",
     "expo-location": "~16.1.0",
